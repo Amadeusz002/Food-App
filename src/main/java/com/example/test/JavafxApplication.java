@@ -8,11 +8,12 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class JavafxApplication extends Application {
+
     private ConfigurableApplicationContext applicationContext;
 
     @Override
     public void init() {
-        applicationContext = new SpringApplicationBuilder(TestApplication.class).run();
+        applicationContext = new SpringApplicationBuilder(FoodApplication.class).run();
     }
 
     @Override
