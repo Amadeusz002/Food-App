@@ -1,5 +1,6 @@
 package com.example.test.model;
 
+import com.example.test.util.MealType;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javax.persistence.*;
@@ -24,6 +25,9 @@ public class Recipe extends RecursiveTreeObject<Recipe> {
     @NotEmpty
     private String description;
 
+    @NotEmpty
+    private MealType mealType;
+
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
@@ -40,6 +44,14 @@ public class Recipe extends RecursiveTreeObject<Recipe> {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
+
+    public MealType getMealType () { return mealType; }
+
+    public void setMealType(MealType mealType) { this.mealType=mealType; }
+
+    public List<Ingredient> getList_of_ingredients () { return list_of_ingredients;}
+
+    public void setList_of_ingredients (Ingredient ingredient) {this.list_of_ingredients.add(ingredient); }
 
 }
 
