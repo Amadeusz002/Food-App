@@ -28,13 +28,8 @@ public class Recipe extends RecursiveTreeObject<Recipe> {
     @NotEmpty
     private MealType mealType;
 
-/*    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY,
-            mappedBy = "recipe"
-    )
-    private List<Ingredient> list_of_ingredients;*/
+    @ManyToMany
+    private List<Ingredient> list_of_ingredients;
 
 
     public String getName() { return name; }
