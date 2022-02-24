@@ -7,9 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -23,8 +22,12 @@ public class AddRecipeController {
 
     public final ApplicationContext applicationContext;
     public final Resource mainView;
-    private JFXTextField textField[] = new JFXTextField[15];
-    private int i=1;
+    private JFXTextField ingredientFields[] = new JFXTextField[15];
+    private JFXTextField quantityFields[] = new JFXTextField[15];
+    private int i=10;
+
+    @FXML
+    private Button ingredientButton;
 
     @FXML
     private GridPane pane_addRecipe;
@@ -51,9 +54,13 @@ public class AddRecipeController {
 
     @FXML
     private void AddTextField(ActionEvent event)  {
-        textField[i] = new JFXTextField();
-        pane_addRecipe.add(textField[i], 5, i);
+        ingredientFields[i] = new JFXTextField();
+        quantityFields[i]= new JFXTextField();
+
+        pane_addRecipe.add(ingredientFields[i], 1, i);
+        pane_addRecipe.add(quantityFields[i],3, i);
         i = i + 1;
+        //pane_addRecipe.addRow(i+1,ingredientButton);
        /* pane_addRecipe.getChildren().add(newField);*/
     }
 }
