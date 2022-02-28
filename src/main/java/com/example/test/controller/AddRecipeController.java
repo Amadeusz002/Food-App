@@ -1,6 +1,9 @@
 package com.example.test.controller;
 
+import com.example.test.util.IngredientQuantityType;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,12 +25,14 @@ public class AddRecipeController {
 
     public final ApplicationContext applicationContext;
     public final Resource mainView;
-    private JFXTextField ingredientFields[] = new JFXTextField[15];
-    private JFXTextField quantityFields[] = new JFXTextField[15];
+    public JFXComboBox quantityCombo;
+    private JFXTextField ingredientFields[] = new JFXTextField[20];
+    private JFXTextField quantityFields[] = new JFXTextField[20];
+    private JFXComboBox comboFields[] = new JFXComboBox[20];
     private int i=10;
+    private ObservableList<Node> children;
+    private int sizePane=11;
 
-    @FXML
-    private Button ingredientButton;
 
     @FXML
     private GridPane pane_addRecipe;
@@ -38,8 +43,13 @@ public class AddRecipeController {
         this.mainView=mainView;
     }
 
+    @FXML
+    public void initialize() {
+        this.quantityCombo.getItems().setAll(IngredientQuantityType.values());
+    }
     public void showMainView(ActionEvent actionEvent) throws IOException {
 
+        cleanTextFields();
         FXMLLoader fxmlLoader;
         fxmlLoader=new FXMLLoader(mainView.getURL());
         fxmlLoader.setControllerFactory((applicationContext::getBean));
@@ -56,11 +66,25 @@ public class AddRecipeController {
     private void AddTextField(ActionEvent event)  {
         ingredientFields[i] = new JFXTextField();
         quantityFields[i]= new JFXTextField();
+        comboFields[i]= new JFXComboBox();
+        comboFields[i].getItems().setAll(IngredientQuantityType.values());
+
 
         pane_addRecipe.add(ingredientFields[i], 1, i);
         pane_addRecipe.add(quantityFields[i],3, i);
+        pane_addRecipe.add(comboFields[i], 4, i );
         i = i + 1;
-        //pane_addRecipe.addRow(i+1,ingredientButton);
-       /* pane_addRecipe.getChildren().add(newField);*/
+
+    }
+
+    private void cleanTextFields(){
+        children=pane_addRecipe.getChildren();
+        int size=children.size();
+
+        while (size>sizePane && children.get(sizePane)!=null){
+            children.remove(sizePane);
+            size--;
+        }
+        i=10;
     }
 }

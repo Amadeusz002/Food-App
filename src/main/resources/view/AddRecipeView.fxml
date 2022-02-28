@@ -10,12 +10,14 @@
 <!-- Widok formularza do dodawania przewoźników-->
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.controller.AddRecipeController">
-    <GridPane fx:id="pane_addRecipe" alignment="center" hgap="10.0" layoutX="300.0" layoutY="202.0" prefHeight="346.0" prefWidth="350.0" vgap="5.0" AnchorPane.bottomAnchor="252.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="289.0" AnchorPane.topAnchor="202.0">
+    <GridPane fx:id="pane_addRecipe" alignment="center" hgap="10.0" layoutX="281.0" layoutY="202.0" prefHeight="231.0" prefWidth="610.0" vgap="5.0" AnchorPane.bottomAnchor="367.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="202.0">
         <columnConstraints>
-            <ColumnConstraints maxWidth="100.0" minWidth="50.0" prefWidth="62.0" />
-            <ColumnConstraints maxWidth="338.0" minWidth="100.0" prefWidth="150.0" />
-            <ColumnConstraints maxWidth="178.0" minWidth="3.0" prefWidth="63.0" />
-            <ColumnConstraints maxWidth="257.0" minWidth="43.0" prefWidth="60.0" />
+            <ColumnConstraints maxWidth="100.0" minWidth="50.0" prefWidth="77.0" />
+            <ColumnConstraints maxWidth="338.0" minWidth="100.0" prefWidth="257.0" />
+            <ColumnConstraints maxWidth="178.0" minWidth="3.0" prefWidth="62.0" />
+            <ColumnConstraints maxWidth="257.0" minWidth="43.0" prefWidth="55.0" />
+         <ColumnConstraints maxWidth="68.0" minWidth="29.0" prefWidth="64.0" />
+         <ColumnConstraints maxWidth="77.0" minWidth="10.0" prefWidth="25.0" />
         </columnConstraints>
         <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
         <JFXButton fx:id="formTitle" alignment="BOTTOM_CENTER" contentDisplay="CENTER" disable="true" prefHeight="51.0" prefWidth="408.0" ripplerFill="#0582ca" text="Enter Airline details" textAlignment="CENTER" textFill="black" GridPane.columnSpan="2" GridPane.rowIndex="2">
@@ -28,31 +30,28 @@
         </JFXButton>
         <Label fx:id="nameLabel" text="Name:" GridPane.rowIndex="4" />
         <Label fx:id="IngredientLabel" text="Ingredient:" GridPane.rowIndex="9" />
-        <Label fx:id="descriptionLabel" text="Description :" GridPane.rowIndex="7" />
+        <Label fx:id="descriptionLabel" prefHeight="17.0" prefWidth="74.0" text="Description :" GridPane.rowIndex="7" />
         <Label fx:id="QuantityLabel" text="Quantity :" GridPane.columnIndex="2" GridPane.rowIndex="9" />
         <Label prefHeight="17.0" prefWidth="163.0" GridPane.rowIndex="10" />
         <JFXTextField fx:id="name" focusColor="#1d3557" prefHeight="25.0" prefWidth="343.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <JFXTextField fx:id="ingredient" focusColor="#1d3557" prefHeight="25.0" prefWidth="343.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
         <JFXTextField fx:id="quantity" focusColor="#1d3557" prefHeight="25.0" prefWidth="226.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
         <JFXTextField fx:id="description" focusColor="#1d3557" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-        <Button fx:id="ingredientButton" layoutX="255.0" layoutY="317.0" mnemonicParsing="false" onAction="#AddTextField" prefHeight="25.0" prefWidth="28.0" text="+" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+        <Button fx:id="ingredientButton" layoutX="255.0" layoutY="317.0" mnemonicParsing="false" onAction="#AddTextField" prefHeight="25.0" prefWidth="28.0" text="+" GridPane.columnIndex="5" GridPane.rowIndex="10" />
+        <JFXComboBox fx:id="quantityCombo" layoutX="15.0" layoutY="33.0" prefWidth="90.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints maxHeight="17.0" minHeight="17.0" prefHeight="17.0" />
-            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-        </rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
     <AnchorPane layoutX="300.0" layoutY="588.0" prefHeight="60.0" prefWidth="680.0" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0">
         <children>
