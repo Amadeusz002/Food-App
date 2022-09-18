@@ -3,7 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -33,23 +33,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
          </JFXButton>
-         <JFXButton alignment="CENTER" contentDisplay="CENTER"  prefHeight="60.0" prefWidth="300.0" ripplerFill="#0582ca" text="Breakfast" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font size="18.0" />
-            </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-         </JFXButton>
-         <JFXButton alignment="CENTER" contentDisplay="CENTER"  prefHeight="60.0" prefWidth="300.0" ripplerFill="#0582ca" text="Dinner" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font size="18.0" />
-            </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-         </JFXButton>
-         <JFXButton alignment="CENTER" contentDisplay="CENTER"  prefHeight="60.0" prefWidth="300.0" ripplerFill="#0582ca" text="Supper" textAlignment="CENTER" textFill="WHITE">
+         <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#showSearchRecipesView" prefHeight="60.0" prefWidth="300.0" ripplerFill="#0582ca" text="Recipes" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font size="18.0" />
             </font>
