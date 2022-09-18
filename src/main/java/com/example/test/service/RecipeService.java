@@ -2,9 +2,11 @@ package com.example.test.service;
 
 import com.example.test.model.Recipe;
 import com.example.test.repository.RecipeRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;

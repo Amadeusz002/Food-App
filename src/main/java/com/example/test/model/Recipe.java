@@ -5,7 +5,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +28,16 @@ public class Recipe extends RecursiveTreeObject<Recipe> {
     private MealType mealType;
 
     @ManyToMany
-    private List<Ingredient> list_of_ingredients;
+    private List<Ingredient> listOfIngredients;
+
+    public Recipe(){ }
+    public Recipe(String name, String description, MealType mealType, List<Ingredient> listOfIngredients){
+        this.name=name;
+        this.description=description;
+        this.mealType=mealType;
+        this.listOfIngredients=listOfIngredients;
+    }
+
 
 
     public String getName() { return name; }
@@ -44,9 +52,9 @@ public class Recipe extends RecursiveTreeObject<Recipe> {
 
     public void setMealType(MealType mealType) { this.mealType=mealType; }
 
-/*    public List<Ingredient> getList_of_ingredients () { return list_of_ingredients;}
+    public List<Ingredient> getListOfIngredients() { return listOfIngredients;}
 
-    public void setList_of_ingredients (Ingredient ingredient) {this.list_of_ingredients.add(ingredient); }*/
+    public void setListOfIngredients(Ingredient ingredient) {this.listOfIngredients.add(ingredient); }
 
 }
 

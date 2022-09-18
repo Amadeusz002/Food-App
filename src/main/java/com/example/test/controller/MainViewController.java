@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
+//Recomended zrobić na podstawie kliknieć, zrobić counter w bazie, który zwiększamy za każdym razem jak wejdziemy w przepis i potem
+//wyświetlamy te co mają najwięcej kliknięć
 @Component
 public class MainViewController {
 

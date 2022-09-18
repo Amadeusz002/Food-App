@@ -1,9 +1,9 @@
 package com.example.test.util;
 
 public enum MealType {
-    DINNER("dinner"),
-    BREAKFAST("breakfast"),
-    SUPPER("supper");
+    DINNER("Dinner"),
+    BREAKFAST("Breakfast"),
+    SUPPER("Supper");
 
     private String label;
 
