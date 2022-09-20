@@ -26,6 +26,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -107,6 +109,14 @@ public class SearchRecipeController {
     private void setMealTypePicker(){
         mealTypePicker.getItems().setAll(MealType.values());
     }
+
+    @FXML
+    private void deleteRecipe(javafx.event.ActionEvent actionEvent){
+        var recipes=recipesTableView.getSelectionModel().getSelectedItem().getValue();
+        recipeService.delete(recipes);
+        this.setModel();
+    }
+
     public void showMainView(ActionEvent actionEvent) throws IOException {
         
         FXMLLoader fxmlLoader;
