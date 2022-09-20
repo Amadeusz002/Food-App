@@ -2,6 +2,9 @@ package com.example.test.model;
 
 import com.example.test.util.MealType;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -56,5 +59,16 @@ public class Recipe extends RecursiveTreeObject<Recipe> {
 
     public void setListOfIngredients(Ingredient ingredient) {this.listOfIngredients.add(ingredient); }
 
+    public StringProperty getNameProperty() {
+        return new SimpleStringProperty(name);
+    }
+
+    public StringProperty getMealTypeProperty() {
+        return new SimpleStringProperty(mealType.toString());
+    }
+
+    public StringProperty getDescriptionProperty() {
+        return new SimpleStringProperty(description);
+    }
 }
 

@@ -39,7 +39,7 @@
                             <Insets />
                         </HBox.margin>
                     </JFXButton>
-                    <JFXButton fx:id="buttonEditRecipe" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="27.0" prefWidth="211.0" ripplerFill="#e9c46a" style="-fx-border-color: #e9c46a; -fx-border-width: 2px;" text="Update" textAlignment="CENTER">
+                    <JFXButton fx:id="buttonEditRecipe" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="27.0" prefWidth="211.0" ripplerFill="#e9c46a" style="-fx-border-color: #e9c46a; -fx-border-width: 2px;" text="Edit" textAlignment="CENTER">
                         <font>
                             <Font size="18.0" />
                         </font>
@@ -78,7 +78,7 @@
                             <Insets />
                         </opaqueInsets>
                     </VBox>
-                    <JFXButton fx:id="filtersResetButton" alignment="CENTER"  prefHeight="38.0" prefWidth="122.0" style="-fx-background-color: #9a031e;" text="Reset filters" textFill="WHITE" TilePane.alignment="BOTTOM_CENTER">
+                    <JFXButton fx:id="filtersResetButton" alignment="CENTER" onAction="#resetFilter" prefHeight="38.0" prefWidth="122.0" style="-fx-background-color: #9a031e;" text="Reset filters" textFill="WHITE" TilePane.alignment="BOTTOM_CENTER">
                         <font>
                             <Font size="14.0" />
                         </font>

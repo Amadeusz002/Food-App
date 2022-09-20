@@ -5,7 +5,8 @@ public enum MealType {
     BREAKFAST("Breakfast"),
     SUPPER("Supper");
 
-    private String label;
+    private final String label;
+
 
     MealType(String label){
         this.label=label;
