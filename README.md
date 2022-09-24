@@ -1,3 +1,3 @@
-# TestAppSpring
+# Food App
 
-Creating test Spring app with JavaFX
+Creating food app using Java spring in my free time
