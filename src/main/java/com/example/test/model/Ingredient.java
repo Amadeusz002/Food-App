@@ -2,11 +2,10 @@ package com.example.test.model;
 
 import com.example.test.util.IngredientQuantityType;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -20,22 +19,30 @@ public class Ingredient extends RecursiveTreeObject<Ingredient> {
     private String name;
 
     @NotEmpty
-    private int quantity;
+    private String quantity;
+
 
     private IngredientQuantityType ingredientQuantityType;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipeID")
+    private Recipe recipe;
+
     public Ingredient() { }
 
-    public Ingredient(String name, int quantity ) {
+    public Ingredient(String name, String quantity, Recipe recipe ) {
         this.name=name;
         this.quantity = quantity;
         this.ingredientQuantityType=null;
+        this.recipe=recipe;
     }
 
-    public Ingredient(String name, int quantity, IngredientQuantityType ingredientQuantityType){
+    public Ingredient(String name, String quantity, IngredientQuantityType ingredientQuantityType, Recipe recipe){
         this.name=name;
         this.quantity = quantity;
         this.ingredientQuantityType=ingredientQuantityType;
+        this.recipe=recipe;
     }
 
 
@@ -44,9 +51,9 @@ public class Ingredient extends RecursiveTreeObject<Ingredient> {
         return id;
     }
 
-    public int getQuantity() { return quantity; }
+    public String getQuantity() { return quantity; }
 
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setQuantity(String quantity) { this.quantity = quantity; }
 
     public String getName() { return name; }
 
@@ -56,6 +63,11 @@ public class Ingredient extends RecursiveTreeObject<Ingredient> {
 
     public void setIngredientQuantityType(IngredientQuantityType ingredientQuantityType) { this.ingredientQuantityType = ingredientQuantityType; }
 
+    public StringProperty getIngredientQuantityTypeProperty() { return new SimpleStringProperty(ingredientQuantityType.toString()); }
+
+    public Recipe getRecipe() { return recipe; }
+
+    public void setRecipe(Recipe recipe) { this.recipe = recipe; }
 
 
 }

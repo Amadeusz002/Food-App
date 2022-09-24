@@ -41,15 +41,6 @@
                <Cursor fx:constant="HAND" />
             </cursor>
          </JFXButton>
-         <JFXButton alignment="CENTER" contentDisplay="CENTER"  onAction="#showAddRecipeView" prefHeight="60.0" prefWidth="300.0" ripplerFill="#0582ca" text="Add recipe" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font size="18.0" />
-            </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-         </JFXButton>
-
       </children>
    </VBox>
 </AnchorPane>

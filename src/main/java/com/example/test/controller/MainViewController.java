@@ -31,16 +31,6 @@ public class MainViewController {
 
 
 
-    public void showAddRecipeView(javafx.event.ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
-        fxmlLoader=new FXMLLoader(addRecipeView.getURL());
-        fxmlLoader.setControllerFactory((applicationContext::getBean));
-        Parent parent =fxmlLoader.load();
-        Stage stage =  (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
-    }
 
 
     public void showSearchRecipesView(javafx.event.ActionEvent actionEvent) throws IOException {

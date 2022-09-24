@@ -30,15 +30,15 @@ public class Recipe extends RecursiveTreeObject<Recipe> {
     @NotEmpty
     private MealType mealType;
 
-    @ManyToMany
+    @NotEmpty
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "recipe")
     private List<Ingredient> listOfIngredients;
 
     public Recipe(){ }
-    public Recipe(String name, String description, MealType mealType, List<Ingredient> listOfIngredients){
+    public Recipe(String name, String description, MealType mealType){
         this.name=name;
         this.description=description;
         this.mealType=mealType;
-        this.listOfIngredients=listOfIngredients;
     }
 
 

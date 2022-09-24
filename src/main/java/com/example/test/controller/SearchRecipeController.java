@@ -48,18 +48,21 @@ public class SearchRecipeController {
     private final Resource mainView;
     private final Resource addRecipeView;
     private final RecipeService recipeService;
+    private final Resource editRecipeView;
 
     private GenericFilter<Recipe> recipeFilter;
 
     public SearchRecipeController(ApplicationContext applicationContext, RecipeService recipeService,
                                   @Value("classpath:/view/SearchRecipeView.fxml") Resource recipeView,
                                   @Value("classpath:/view/MainView.fxml") Resource mainView,
-                                  @Value("classpath:/view/AddRecipeView.fxml") Resource addRecipeView ) {
+                                  @Value("classpath:/view/AddRecipeView.fxml") Resource addRecipeView,
+                                  @Value("classpath:/view/EditRecipeView.fxml") Resource editRecipeView) {
         this.applicationContext = applicationContext;
         this.recipeView=recipeView;
         this.mainView=mainView;
         this.addRecipeView=addRecipeView;
         this.recipeService=recipeService;
+        this.editRecipeView=editRecipeView;
     }
     public void setModel(){
         //Ustawienie kolumn
@@ -77,9 +80,11 @@ public class SearchRecipeController {
             return cell;
         });
 
+        //pobranie wartości z bazy danych
         ObservableList<Recipe> recipes;
         recipes= FXCollections.observableList(recipeService.findAll());
 
+        //przekazanie danych do tabeli
         final TreeItem<Recipe> root= new RecursiveTreeItem<>(recipes, RecursiveTreeObject::getChildren);
         recipesTableView.setRoot(root);
         recipesTableView.setShowRoot(false);
@@ -87,10 +92,13 @@ public class SearchRecipeController {
     }
 
     private void setPredicates(){
+        //Generyczna klasa filtrów dla danego modelu
         recipeFilter= new GenericFilter<>(recipesTableView);
+        //filtrowanie na podstawie wartości comboBox
         recipeFilter.addPredicate(testedValue ->
                 testedValue.getMealType().equals(mealTypePicker.getValue())||
                 mealTypePicker.getValue()== null);
+        //dodanie obserwatora zmiany wartości
         recipeFilter.setListener(mealTypePicker.valueProperty());
     }
     @FXML
@@ -117,6 +125,14 @@ public class SearchRecipeController {
         this.setModel();
     }
 
+    @FXML
+    private void handleUpdateAction(ActionEvent actionEvent) throws IOException {
+        var recipe=recipesTableView.getSelectionModel().getSelectedItem();
+        if(recipe!=null){
+            this.showEditRecipeView(actionEvent,recipe.getValue());
+        }
+    }
+
     public void showMainView(ActionEvent actionEvent) throws IOException {
         
         FXMLLoader fxmlLoader;
@@ -135,6 +151,20 @@ public class SearchRecipeController {
         fxmlLoader.setControllerFactory((applicationContext::getBean));
         Parent parent =fxmlLoader.load();
         Stage stage =  (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void showEditRecipeView(javafx.event.ActionEvent actionEvent, Recipe recipe) throws IOException {
+        FXMLLoader fxmlLoader=new FXMLLoader(editRecipeView.getURL());
+        fxmlLoader.setControllerFactory((applicationContext::getBean));
+        Parent parent =fxmlLoader.load();
+        Stage stage =  (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        if (recipe!=null){
+            EditRecipeController editRecipeController= fxmlLoader.getController();
+            editRecipeController.setData(recipe);
+        }
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.show();

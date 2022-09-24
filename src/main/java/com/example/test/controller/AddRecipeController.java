@@ -2,6 +2,7 @@ package com.example.test.controller;
 
 import com.example.test.model.Ingredient;
 import com.example.test.model.Recipe;
+import com.example.test.service.IngredientService;
 import com.example.test.service.RecipeService;
 import com.example.test.util.IngredientQuantityType;
 import com.example.test.util.MealType;
@@ -25,6 +26,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -39,14 +41,15 @@ public class AddRecipeController {
     public JFXTextField name, ingredient, quantity;
     public JFXTextArea description;
 
-    private List<Ingredient> listOfIngredients;
-    private JFXTextField ingredientFields[] = new JFXTextField[20];
-    private JFXTextField quantityFields[] = new JFXTextField[20];
-    private JFXComboBox comboFields[] = new JFXComboBox[20];
-    private int i=10;
+    private List<Ingredient> listOfIngredients= new LinkedList<>();
+    public JFXTextField[] ingredientFields = new JFXTextField[20];
+    public JFXTextField[] quantityFields = new JFXTextField[20];
+    public JFXComboBox[] comboFields = new JFXComboBox[20];
+    private int i=0;
     private ObservableList<Node> children;
     private int sizePane=11;
     private RecipeService recipeService;
+    private IngredientService ingredientService;
 
 // Do edycji przepisów zrobi się nowy widok i kontroler
     @FXML
@@ -54,10 +57,11 @@ public class AddRecipeController {
 
     public AddRecipeController(ApplicationContext applicationContext,
                                @Value("classpath:/view/MainView.fxml") Resource mainView,
-                               RecipeService recipeService){
+                               RecipeService recipeService, IngredientService ingredientService){
         this.applicationContext=applicationContext;
         this.mainView=mainView;
         this.recipeService=recipeService;
+        this.ingredientService=ingredientService;
     }
 
     @FXML
@@ -90,9 +94,9 @@ public class AddRecipeController {
             comboFields[i].getItems().setAll(IngredientQuantityType.values());
 
 
-            pane_addRecipe.add(ingredientFields[i], 1, i);
-            pane_addRecipe.add(quantityFields[i],3, i);
-            pane_addRecipe.add(comboFields[i], 4, i );
+            pane_addRecipe.add(ingredientFields[i], 1, i+10);
+            pane_addRecipe.add(quantityFields[i],3, i+10);
+            pane_addRecipe.add(comboFields[i], 4, i +10);
 
             i = i + 1;
         }
@@ -101,7 +105,7 @@ public class AddRecipeController {
     }
     @FXML
     private void DeleteTextField(ActionEvent event)  {
-        if(i>9){
+        if(i>=0){
             pane_addRecipe.getChildren().remove(ingredientFields[i]);
             pane_addRecipe.getChildren().remove(quantityFields[i]);
             pane_addRecipe.getChildren().remove(comboFields[i]);
@@ -110,7 +114,9 @@ public class AddRecipeController {
             quantityFields[i]= null;
             comboFields[i]= null;
 
-            i = i - 1;
+            if(i>0) {
+                i = i - 1;
+            }
         }
 
 
@@ -124,7 +130,7 @@ public class AddRecipeController {
             children.remove(sizePane);
             size--;
         }
-        i=10;
+        i=0;
     }
 
     public void handleSubmitButtonAction(ActionEvent actionEvent) throws IOException {
@@ -132,18 +138,24 @@ public class AddRecipeController {
         /**
          * stworzenie listy składników na podstawie formularzu
          */
-        while(i>10){
-            if (this.ingredientFields[i]!=null && this.quantityFields[i]!=null ) {
-                Ingredient ingredient = new Ingredient(this.ingredientFields[i].getText(), Integer.parseInt(this.quantityFields[i].getText()), (IngredientQuantityType) this.comboFields[i].getValue());
-                listOfIngredients.add(ingredient);
+        Recipe recipe=new Recipe(name.getText(),  description.getText(), (MealType) mealTypeCombo.getValue());
+        recipeService.save(recipe);
+        Ingredient ingredient1 = new Ingredient((this.ingredient.getText()),this.quantity.getText(),(IngredientQuantityType) this.quantityCombo.getValue(), recipe );
+        this.ingredientService.save(ingredient1);
+        this.listOfIngredients.add(ingredient1);
+        while(i>=0){
+            if (ingredientFields[i]!=null && quantityFields[i]!=null ) {
+                ingredient1 = new Ingredient(ingredientFields[i].getText(), quantityFields[i].getText(), (IngredientQuantityType) comboFields[i].getValue(), recipe);
+                this.ingredientService.save(ingredient1);
+                this.listOfIngredients.add(ingredient1);
+
             }
             i = i - 1;
+
         }
         /**
          * stowrzenie nowego przepisu
          */
-        Recipe recipe=new Recipe(name.getText(),  description.getText(), (MealType) mealTypeCombo.getValue(), listOfIngredients);
-        this.recipeService.save(recipe);
         cleanTextFields();
 
         showMainView(actionEvent);
